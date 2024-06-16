@@ -6,13 +6,24 @@ const aside = document.querySelector(".product-detail")
 const menuCarritoIcon = document.querySelector(".navbar-shopping-cart")
 const inactiveClass = "inactive"
 const documentDiv = document.querySelector(".cards-container")
+const productDetailCloseBtn = document.querySelector(".product-detail-close")
+const productDetailAside = document.querySelector("#specifitProductDetail")
+
 function hide(element){
     element.classList.add(inactiveClass)
 }
+function showProductDetail(){
+    hide(desktopMenu)
+    hide(mobileMenu)
+    hide(aside)
+    productDetailAside.classList.remove(inactiveClass)
+}
+
 function showMenus(){
     desktopMenu.classList.toggle(inactiveClass)
     mobileMenu.classList.toggle(inactiveClass)
     hide(aside)
+    hide(productDetailAside)
 }
 
 menuMail.addEventListener("click",e=>{
@@ -27,6 +38,10 @@ menuCarritoIcon.addEventListener("click",e=>{
     aside.classList.toggle(inactiveClass)
     hide(desktopMenu)
     hide(mobileMenu)
+    hide(productDetailAside)
+})
+productDetailCloseBtn.addEventListener("click",e=>{
+    hide(productDetailAside)
 })
 
 // insertar productos al DOM
@@ -77,6 +92,7 @@ promise.forEach(product => {
 
     let productImage = document.createElement("img")
     productImage.setAttribute("src",product.image)
+    productImage.addEventListener("click",showProductDetail)
 
     let divContainer = document.createElement("div")
 
